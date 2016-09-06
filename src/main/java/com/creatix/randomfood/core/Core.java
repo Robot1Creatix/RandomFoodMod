@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Core.modid, name = Core.modid, version = Core.version)
 public class Core
@@ -24,6 +25,8 @@ public class Core
 	@Instance(modid)
 	public static Core instance;
 
+	public static Logger log;
+
 	public static CreativeTabs tab = new CreativeTabs(modid)
 	{
 		@Override
@@ -36,6 +39,7 @@ public class Core
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent e)
 	{
+		log = e.getModLog();
 		proxy.preInit(e);
 	}
 

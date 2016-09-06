@@ -16,7 +16,7 @@ public class OvenContainer extends ContainerWithPlayerInv {
 
 	private TileOven te;
 	public OvenContainer(IInventory playerInv, TileOven te) {
-		super(playerInv, new Slot[] {new Slot(te, 0, 80, 31), new SmartSlot(te, 1, 157, 59, (stack) -> stack.getItem() == Items.COAL || Block.getBlockFromItem(stack.getItem()) == Blocks.DRAGON_EGG)});
+		super(playerInv, new Slot[] {new Slot(te, 0, 80, 31),new SmartSlot(te, 2, 0, 59, (stack) -> false)  ,new SmartSlot(te, 2, 157, 59, (stack) -> stack.getItem() == Items.COAL || Block.getBlockFromItem(stack.getItem()) == Blocks.DRAGON_EGG)});
 		this.te = te;
 	}
 
