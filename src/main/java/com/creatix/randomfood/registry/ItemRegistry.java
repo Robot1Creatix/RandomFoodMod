@@ -23,18 +23,17 @@ public class ItemRegistry
 	public static BasicFood burned_toast = new BasicFood("burned_toast", 1, 2F, false, true, Arrays.asList(new TextComponentTranslation("text.burned_toast.desc").getFormattedText()));
 	public static Item knife = new Knife();
 
-	private static void register(Item item,String name ,Side s)
+	private static void register(Item item,String name)
 	{
-		if(s == Side.CLIENT)
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Core.modid+":"+name, "inventory"));
-		GameRegistry.registerItem(item);
+		GameRegistry.register(item);
+		Core.proxy.cache(item);
 	}
 
-	public static void init(Side s)
+	public static void init()
 	{
-		register(toast, "toast", s);
-		register(baked_toast, "baked_toast", s);
-		register(burned_toast, "burned_toast", s);
-		register(knife, "knife", s);
+		register(toast, "toast");
+		register(baked_toast, "baked_toast");
+		register(burned_toast, "burned_toast");
+		register(knife, "knife");
 	}
 }

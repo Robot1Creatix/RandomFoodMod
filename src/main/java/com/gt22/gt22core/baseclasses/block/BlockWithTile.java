@@ -11,9 +11,9 @@ import com.gt22.gt22core.utils.ToolClass;
 public class BlockWithTile extends BlockBase implements ITileEntityProvider
 {
 
-	Class<? extends TileEntity> te;
-	Class[] constructorArgs;
-	Object[] consturctorInvokeArgs;
+	protected Class<? extends TileEntity> te;
+	protected Class[] constructorArgs;
+	protected Object[] consturctorInvokeArgs;
 
 	/**
 	 * 
@@ -82,4 +82,8 @@ public class BlockWithTile extends BlockBase implements ITileEntityProvider
 		return null;
 	}
 
+	public Class<? extends TileEntity> getTe() {
+		return te;
+	}
+	
 }
