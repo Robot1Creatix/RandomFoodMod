@@ -1,6 +1,7 @@
 package com.creatix.randomfood.proxy;
 
 import com.creatix.randomfood.core.Core;
+import com.creatix.randomfood.gui.GuiHandler;
 import com.creatix.randomfood.registry.BlockRegistry;
 import com.creatix.randomfood.registry.ItemRegistry;
 import com.creatix.randomfood.registry.ModelRegistry;
@@ -34,6 +35,7 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent e) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
 		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.toast, 3), new Object[] { new ItemStack(ItemRegistry.knife, 1, OreDictionary.WILDCARD_VALUE), Items.BREAD });
 	}
 	
