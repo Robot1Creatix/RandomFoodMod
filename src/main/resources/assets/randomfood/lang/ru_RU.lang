@@ -1,0 +1,5 @@
+item.knife.name=Нож
+item.toast.name=Тост
+item.baked_toast.name=Поджареный тост
+item.burned_toast.name=Горелый тост
+text.burned_toast.desc=Я не советую тебе это есть

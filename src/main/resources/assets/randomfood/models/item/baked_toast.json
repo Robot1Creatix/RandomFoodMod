@@ -1,0 +1,6 @@
+{
+	"parent": "randomfood:item/ItemGeneric",
+	"textures": {
+		"layer0": "randomfood:items/baked_toast"
+	}
+}

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "randomfood:oven" },
+        "facing=south": { "model": "randomfood:oven", "y": 180 },
+        "facing=west":  { "model": "randomfood:oven", "y": 270 },
+        "facing=east":  { "model": "randomfood:oven", "y": 90 }
+    }
+}

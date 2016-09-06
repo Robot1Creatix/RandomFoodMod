@@ -1,0 +1,11 @@
+{
+"parent": "block/cube",
+"textures": {
+"up": "randomfood:blocks/oven_top",
+"down": "randomfood:blocks/oven_top",
+"north": "randomfood:blocks/oven_front",
+"east": "randomfood:blocks/oven_side",
+"south": "randomfood:blocks/oven_side",
+"west": "randomfood:blocks/oven_side"
+}
+}
