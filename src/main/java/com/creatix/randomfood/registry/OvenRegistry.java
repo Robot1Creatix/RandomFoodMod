@@ -67,7 +67,7 @@ public class OvenRegistry
 		return OvenRecipe.getRecipeByInput(input);
 	}
 
-	public static List<OvenRecipe> getByOutput(ItemStack output)
+	public static OvenRecipe[] getByOutput(ItemStack output)
 	{
 		return OvenRecipe.getRecipeByOutput(output);
 	}
@@ -116,11 +116,9 @@ public class OvenRegistry
 			}
 		}
 
-		private static List<OvenRecipe> getRecipeByOutput(ItemStack output)
+		private static OvenRecipe[] getRecipeByOutput(ItemStack output)
 		{
-			List<OvenRecipe> ret = new ArrayList<OvenRecipe>();
-			recipeList.stream().filter(r -> ItemStack.areItemStacksEqual(output, r.output)).forEach(r -> ret.add(r));
-			return ret;
+			return recipeList.stream().filter(r -> ItemStack.areItemStacksEqual(output, r.output)).toArray(size -> new OvenRecipe[size]);
 		}
 
 		private static OvenRecipe getRecipeByInput(ItemStack input)
