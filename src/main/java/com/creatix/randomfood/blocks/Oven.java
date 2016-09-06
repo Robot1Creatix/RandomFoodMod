@@ -39,5 +39,10 @@ public class Oven extends BlockFurnace implements IMultitextureBlock {
 		}
 		return new ResourceLocation(Core.modid, "blocks/oven_" + textureside);
 	}
+	
+	@Override
+	public ResourceLocation getParticleTexture() {
+		return getTexture(EnumFacing.SOUTH);
+	}
 
 }

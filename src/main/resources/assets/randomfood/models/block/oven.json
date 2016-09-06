@@ -1,6 +1,7 @@
 {
 "parent": "block/cube",
 "textures": {
+"particle": "randomfood:blocks/oven_side",
 "up": "randomfood:blocks/oven_top",
 "down": "randomfood:blocks/oven_top",
 "north": "randomfood:blocks/oven_front",
