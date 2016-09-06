@@ -1,80 +1,119 @@
 package com.creatix.randomfood.te;
 
-import com.creatix.randomfood.blocks.Oven;
-import com.creatix.randomfood.recipies.OvenRecipe;
+import com.creatix.randomfood.registry.OvenRegistry;
+import com.creatix.randomfood.registry.OvenRegistry.OvenRecipe;
 import com.gt22.gt22core.baseclasses.tileEntity.TileWithInventory;
-import mezz.jei.plugins.jei.JEIInternalPlugin;
+import com.gt22.gt22core.utils.Gt22MathHelper;
+
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-public class TileOven extends TileWithInventory implements ITickable{
+public class TileOven extends TileWithInventory implements ITickable
+{
 
-	public int processTime;
-	public int fuel = 20;
+	public int processTime = 0;
+	public int fuel = 0;
+	public static final int MAX_FUEL = 100;
+	public static final int MAX_PROGRESS = 150;
+	public static final int PROGRESS_BAR_HEIHT = 32;
 
-	public TileOven() {
-		super(2, true);
-		OvenRecipe.initRecipies();
+	public TileOven()
+	{
+		super(3, true);
 	}
 
-	public float getFuelLevel() {
-		if(fuel < 0)
+	public float getFuelLevel()
+	{
+		if (fuel < 0)
 			fuel = 0;
-		if(fuel > 100)
-			fuel = 100;
-		return fuel / 100;
+		if (fuel > MAX_FUEL)
+			fuel = MAX_FUEL;
+		return fuel / MAX_FUEL;
 	}
-	public int getScaledProcess(int i) {
-		if(processTime < 0)
-			processTime = 0;
-		if(processTime > 150)
-			processTime = 150;
-		return processTime * i / 150;
+
+	public int getScaledProcess()
+	{
+		return (processTime = (int) Gt22MathHelper.bound(processTime, 0, MAX_PROGRESS)) * PROGRESS_BAR_HEIHT / MAX_PROGRESS;
 	}
-	public boolean isProcessing() {
+
+	public boolean isProcessing()
+	{
 		return processTime > 0 && processTime <= 150;
 	}
-	@Override
-	public void update() {
 
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		ItemStack fuelSlot = getStackInSlot(2);
+	public boolean canConsumeFuel(ItemStack fuel)
+	{
+		return Gt22MathHelper.isInBound(OvenRegistry.getFuel(fuel), 1, MAX_FUEL - this.fuel);
+	}
+
+	@Override
+	public void update()
+	{
+		if (canConsumeFuel(getStackInSlot(2)))
+		{
+			fuel += OvenRegistry.getFuel(getStackInSlot(2));
+			decrStackSize(2, 1);
+		}
+		OvenRecipe rec = OvenRegistry.getByInput(getStackInSlot(0));
+		if (canProcess())
+		{
+			processTime++;
+			if (processTime == MAX_PROGRESS)
+			{
+				decrStackSize(0, rec.input.stackSize);
+				fuel -= rec.reqFuel;
+				ItemStack outs = rec.output.copy();
+				outs.stackSize += getOutputStackSize();
+				setInventorySlotContents(1, outs);
+				processTime = 0;
+			}
+		}
+		else
+		{
+			processTime = 0;
+		}
+	}
+
+	private boolean canProcess()
+	{
 		ItemStack out = getStackInSlot(1);
 		ItemStack in = getStackInSlot(0);
-				if(OvenRecipe.getRecipeByInput(in) != OvenRecipe.INVALID_RECIPE)
-				{
-					OvenRecipe rec = OvenRecipe.getRecipeByInput(in);
-					if(in.stackSize < rec.input.stackSize)
-						return;
-					if(fuel < rec.reqFuel)
-						return;
-					if(out == null || (out.isItemEqual(rec.input) && out.stackSize <= getInventoryStackLimit()-rec.output.stackSize)) {
-						processTime++;
-						if(processTime == 150) {
-							if (out == null) {
-								decrStackSize(0, rec.input.stackSize);
-								setInventorySlotContents(1, rec.output);
-								fuel -= rec.reqFuel;
-							} else {
-								decrStackSize(0, rec.input.stackSize);
-								getStackInSlot(1).stackSize+=rec.output.stackSize;
-								fuel -=rec.reqFuel;
-							}
-							processTime = 0;
-						}
-					}else{}
-				}
+		OvenRecipe rec = OvenRegistry.getByInput(in);
+		return rec != OvenRegistry.INVALID_RECIPE && in.stackSize >= rec.input.stackSize && fuel >= rec.reqFuel && (out == null || (out.isItemEqual(rec.output) && out.stackSize <= getInventoryStackLimit() - rec.output.stackSize));
 	}
+
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
-		super.writeToNBT(nbt);
-		nbt.setInteger("fuel", fuel);
-		return  nbt;
+		switch (index)
+		{
+			case (0):
+			{
+				return true;
+			}
+			case (1):
+			{
+				return false;
+			}
+			case (2):
+			{
+				return OvenRegistry.getFuel(stack) > 0;
+			}
+			default:
+			{
+				return false;
+			}
+		}
 	}
+
+	private int getOutputStackSize()
+	{
+		ItemStack out = getStackInSlot(1);
+		return out == null ? 0 : out.stackSize;
+	}
+
 	@Override
 	protected void writeSyncNbt(NBTTagCompound nbt)
 	{
@@ -82,6 +121,7 @@ public class TileOven extends TileWithInventory implements ITickable{
 		nbt.setInteger("FUEL", fuel);
 		nbt.setInteger("PROC", processTime);
 	}
+
 	@Override
 	protected void readSyncNbt(NBTTagCompound nbt)
 	{

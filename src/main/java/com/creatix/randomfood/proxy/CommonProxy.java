@@ -5,11 +5,10 @@ import com.creatix.randomfood.gui.GuiHandler;
 import com.creatix.randomfood.registry.BlockRegistry;
 import com.creatix.randomfood.registry.ItemRegistry;
 import com.creatix.randomfood.registry.ModelRegistry;
+import com.creatix.randomfood.registry.OvenRegistry;
 import com.gt22.gt22core.texturegen.TextureGenRegistry;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,7 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent e) {
 		ItemRegistry.init();
 		BlockRegistry.init();
+		OvenRegistry.init();
 		TextureGenRegistry.reigster(new ItemRegistry(), Core.modid);
 		TextureGenRegistry.reigster(new BlockRegistry(), Core.modid);
 	}

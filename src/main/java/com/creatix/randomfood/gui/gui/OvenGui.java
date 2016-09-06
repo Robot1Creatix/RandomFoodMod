@@ -21,6 +21,11 @@ public class OvenGui extends GuiContainer{
 		int k = (this.width - this.xSize) / 2;
 	    int l = (this.height - this.ySize) / 2;
 	    drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
+	    if(te.isProcessing())
+	    {
+	    	int pr = te.getScaledProcess();
+	    	drawTexturedModalRect(k + 72, l + 54 - pr, 176, 31 - pr, 32, pr);
+	    }
 	}
 
 }
