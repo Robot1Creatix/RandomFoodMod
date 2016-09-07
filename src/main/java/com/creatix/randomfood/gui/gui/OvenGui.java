@@ -1,16 +1,14 @@
 package com.creatix.randomfood.gui.gui;
 
+import java.util.Arrays;
+
 import com.creatix.randomfood.core.Core;
 import com.creatix.randomfood.te.TileOven;
+import com.creatix.randomfood.utils.GuiHelper;
 
-import mezz.jei.gui.GuiHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class OvenGui extends GuiContainer{
 
@@ -35,7 +33,7 @@ public class OvenGui extends GuiContainer{
 	    if(te.fuel > 0)
 	    {
 	    	int fuel = te.getFuelLevel();
-	    	drawTexturedModalRect(k + 159, l + 56 - fuel, 176, 81 - fuel, 12, fuel);
+	    	drawTexturedModalRect(k + 159, l + 56 - fuel, 176, 83 - fuel, 12, fuel);
 	    }
 
 	}
@@ -44,16 +42,16 @@ public class OvenGui extends GuiContainer{
 	{
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
-		if(com.creatix.randomfood.utils.GuiHelper.isMouseBetween(mouseX, mouseY,k+159, l+9, 14, 50))
-            this.drawHoveringText(Arrays.asList(te.fuel+"F"), mouseX-k, l+mouseY-l);
+		if(GuiHelper.isMouseBetween(mouseX, mouseY,k+159, l+9, 14, 50))
+            this.drawHoveringText(Arrays.asList(te.fuel + "%"), mouseX-k, mouseY-l);
         if(te.getStackInSlot(0) == null)
             if(this.isPointInRegion(80, 32, 16, 16, mouseX, mouseY))
-                 this.drawHoveringText(Arrays.asList("Input"), mouseX-k, l+mouseY-l);
+                 this.drawHoveringText(Arrays.asList("Input"), mouseX-k, mouseY-l);
         if(te.getStackInSlot(1) == null)
             if(this.isPointInRegion(80, 59, 16, 16, mouseX, mouseY))
-                this.drawHoveringText(Arrays.asList("Output"), mouseX-k, l+mouseY-l);
+                this.drawHoveringText(Arrays.asList("Output"), mouseX-k, mouseY-l);
         if(te.getStackInSlot(2) == null)
             if(this.isPointInRegion(157, 59, 16, 16, mouseX, mouseY))
-                this.drawHoveringText(Arrays.asList("Fuel"), mouseX-k, l+mouseY-l);
+                this.drawHoveringText(Arrays.asList("Fuel"), mouseX-k, mouseY-l);
 	}
 }
