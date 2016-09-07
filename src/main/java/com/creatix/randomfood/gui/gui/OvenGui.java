@@ -26,6 +26,11 @@ public class OvenGui extends GuiContainer{
 	    	int pr = te.getScaledProcess();
 	    	drawTexturedModalRect(k + 72, l + 54 - pr, 176, 31 - pr, 32, pr);
 	    }
+	    if(te.fuel > 0)
+	    {
+	    	int fuel = te.getFuelLevel();
+	    	drawTexturedModalRect(k + 159, l + 56 - fuel, 176, 81 - fuel, 12, fuel);
+	    }
 	}
 
 }

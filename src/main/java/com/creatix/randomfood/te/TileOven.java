@@ -17,25 +17,21 @@ public class TileOven extends TileWithInventory implements ITickable
 	public int fuel = 0;
 	public static final int MAX_FUEL = 100;
 	public static final int MAX_PROGRESS = 150;
-	public static final int PROGRESS_BAR_HEIHT = 32;
-
+	public static final int PROGRESS_BAR_HEIGHT = 32;
+	public static final int FUEL_BAR_HEIGTH = 50;
 	public TileOven()
 	{
 		super(3, true);
 	}
 
-	public float getFuelLevel()
+	public int getFuelLevel()
 	{
-		if (fuel < 0)
-			fuel = 0;
-		if (fuel > MAX_FUEL)
-			fuel = MAX_FUEL;
-		return fuel / MAX_FUEL;
+		return (fuel = (int) Gt22MathHelper.bound(fuel, 0, MAX_FUEL)) * FUEL_BAR_HEIGTH / MAX_FUEL;
 	}
 
 	public int getScaledProcess()
 	{
-		return (processTime = (int) Gt22MathHelper.bound(processTime, 0, MAX_PROGRESS)) * PROGRESS_BAR_HEIHT / MAX_PROGRESS;
+		return (processTime = (int) Gt22MathHelper.bound(processTime, 0, MAX_PROGRESS)) * PROGRESS_BAR_HEIGHT / MAX_PROGRESS;
 	}
 
 	public boolean isProcessing()
