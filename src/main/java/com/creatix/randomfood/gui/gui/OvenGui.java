@@ -1,12 +1,22 @@
 package com.creatix.randomfood.gui.gui;
 
+import java.util.Arrays;
+
 import com.creatix.randomfood.core.Core;
 import com.creatix.randomfood.te.TileOven;
+<<<<<<< HEAD
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
+=======
+import com.creatix.randomfood.utils.GuiHelper;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+>>>>>>> 560997a75f4fa57b3d1ae54693336cebc520d581
 
 public class OvenGui extends GuiContainer{
 
@@ -31,7 +41,7 @@ public class OvenGui extends GuiContainer{
 	    if(te.fuel > 0)
 	    {
 	    	int fuel = te.getFuelLevel();
-	    	drawTexturedModalRect(k + 159, l + 56 - fuel, 176, 81 - fuel, 12, fuel);
+	    	drawTexturedModalRect(k + 159, l + 56 - fuel, 176, 83 - fuel, 12, fuel);
 	    }
 
 	}
@@ -40,8 +50,13 @@ public class OvenGui extends GuiContainer{
 	{
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
+<<<<<<< HEAD
 		if(com.creatix.randomfood.utils.GuiHelper.isMouseBetween(mouseX, mouseY,k+159, l+9, 14, 50))
             this.drawHoveringText(Arrays.asList(te.fuel+"%"), mouseX-k, mouseY-l);
+=======
+		if(GuiHelper.isMouseBetween(mouseX, mouseY,k+159, l+9, 14, 50))
+            this.drawHoveringText(Arrays.asList(te.fuel + "%"), mouseX-k, mouseY-l);
+>>>>>>> 560997a75f4fa57b3d1ae54693336cebc520d581
         if(te.getStackInSlot(0) == null)
             if(this.isPointInRegion(80, 32, 16, 16, mouseX, mouseY))
                  this.drawHoveringText(Arrays.asList("Input"), mouseX-k, mouseY-l);
