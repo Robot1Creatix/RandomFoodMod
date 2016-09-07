@@ -9,6 +9,7 @@ import com.creatix.randomfood.registry.OvenRegistry;
 import com.gt22.gt22core.texturegen.TextureGenRegistry;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -34,9 +35,16 @@ public class CommonProxy {
 		ModelRegistry.init();
 	}
 
+	public static final ItemStack KNIFE = new ItemStack(ItemRegistry.knife, 1, OreDictionary.WILDCARD_VALUE);
+
 	public void postInit(FMLPostInitializationEvent e) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(Core.instance, new GuiHandler());
-		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.toast, 3), new Object[] { new ItemStack(ItemRegistry.knife, 1, OreDictionary.WILDCARD_VALUE), Items.BREAD });
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.toast, 3), new Object[] {KNIFE, Items.BREAD});
+		GameRegistry.addShapelessRecipe(new ItemStack(ItemRegistry.apple_piece, 4), new Object[]{KNIFE, Items.APPLE});
+		GameRegistry.addShapelessRecipe(new ItemStack(Items.APPLE), new Object[]{ItemRegistry.apple_piece, ItemRegistry.apple_piece,ItemRegistry.apple_piece,ItemRegistry.apple_piece});
+		GameRegistry.addRecipe(new ItemStack(BlockRegistry.oven),
+				new Object[]{ "BPB", "IFI", "BIB",
+						('B'), Blocks.BRICK_BLOCK, ('P'), Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, ('I'), Items.IRON_INGOT, ('F'), Blocks.FURNACE});
 	}
 	
 	@SideOnly(Side.CLIENT)
