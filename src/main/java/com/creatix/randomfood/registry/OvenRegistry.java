@@ -89,7 +89,7 @@ public class OvenRegistry
 	public static class OvenRecipe
 	{
 
-		private static List<OvenRecipe> recipeList;
+		public static List<OvenRecipe> recipeList;
 
 		public int reqFuel;
 		public ItemStack input;

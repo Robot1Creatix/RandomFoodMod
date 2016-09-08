@@ -3,3 +3,6 @@ item.toast.name=Тост
 item.baked_toast.name=Поджареный тост
 item.burned_toast.name=Горелый тост
 text.burned_toast.desc=Я не советую тебе это есть
+tile.Oven.name=Духовка
+randomfood.oven=Духовка
+randomfood.oven.reqfuel=Требуется топлива: %s
