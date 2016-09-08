@@ -6,8 +6,10 @@ import com.gt22.gt22core.baseclasses.tileEntity.TileWithInventory;
 import com.gt22.gt22core.utils.Gt22MathHelper;
 
 import net.minecraft.init.Items;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
 public class TileOven extends TileWithInventory implements ITickable
@@ -125,4 +127,10 @@ public class TileOven extends TileWithInventory implements ITickable
 		fuel = nbt.getInteger("FUEL");
 		processTime = nbt.getInteger("PROC");
 	}
+
+	private static final int[] side = new int[]{0};
+	private static final int[] down = new int[]{1};
+	public static final int [] back = new int[]{2};
+
+
 }

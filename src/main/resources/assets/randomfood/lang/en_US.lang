@@ -3,6 +3,11 @@ item.toast.name=Toast
 item.baked_toast.name=Baked Toast
 item.burned_toast.name=Burned Toast
 text.burned_toast.desc=I do not advise you to eat it!
+<<<<<<< HEAD
 tile.Oven.name=Oven
 randomfood.oven=Oven
 randomfood.oven.reqfuel=Rquired fuel: %s
+=======
+item.applepiece.name=Apple Piece
+tile.Oven.name=Oven
+>>>>>>> 94817cc51a5b83c4914d9c7a3b1438bdde434590

@@ -82,4 +82,8 @@ public class BlockWithTile extends BlockBase implements ITileEntityProvider
 		return null;
 	}
 
+	public Class<? extends TileEntity> getTe()
+	{
+		return te;
+	}
 }

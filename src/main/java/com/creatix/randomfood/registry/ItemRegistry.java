@@ -21,6 +21,7 @@ public class ItemRegistry
 	public static BasicFood toast = new BasicFood("toast", 1, 1F, false, false);
 	public static BasicFood baked_toast = new BasicFood("baked_toast", 4, 4F, false, false);
 	public static BasicFood burned_toast = new BasicFood("burned_toast", 1, 2F, false, true, Arrays.asList(new TextComponentTranslation("text.burned_toast.desc").getFormattedText()));
+		public static BasicFood apple_piece = new BasicFood("applepiece", 1, 1F, false, false);
 	public static Item knife = new Knife();
 
 	private static void register(Item item,String name)
@@ -34,6 +35,7 @@ public class ItemRegistry
 		register(toast, "toast");
 		register(baked_toast, "baked_toast");
 		register(burned_toast, "burned_toast");
+		register(apple_piece, "applepiece");
 		register(knife, "knife");
 	}
 }
