@@ -1,10 +1,12 @@
 package com.creatix.randomfood.registry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import com.creatix.randomfood.core.Core;
+import com.creatix.randomfood.jei.RecipeWrapperBase.RecipeBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -86,17 +88,16 @@ public class OvenRegistry
 		return value;
 	}
 
-	public static class OvenRecipe
+	public static class OvenRecipe extends RecipeBase
 	{
 
 		public static List<OvenRecipe> recipeList;
 
 		public int reqFuel;
-		public ItemStack input;
-		public ItemStack output;
-
+		public ItemStack input, output;//Short accesors
 		public OvenRecipe(ItemStack input, ItemStack output, int fuel)
 		{
+			super(Arrays.asList(input), Arrays.asList(output));
 			this.reqFuel = fuel;
 			this.input = input;
 			this.output = output;
