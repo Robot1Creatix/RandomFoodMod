@@ -18,7 +18,7 @@ public class Core
 {
 	public static final int majorversion = 1, minorversion = 1, mcversion = 1102, bugfixversion = 0;
 	public static final String modid = "gt22core", name = "Gt22 core", version = majorversion + "." + minorversion + "." + mcversion + "." + bugfixversion;
-	private static boolean isDev;
+	private static boolean isDev = true;
 	@SidedProxy(clientSide = "com.gt22.gt22core.proxy.ClientProxy", serverSide = "com.gt22.gt22core.proxy.ClientProxy")
 	public static CommonProxy proxy;
 	
